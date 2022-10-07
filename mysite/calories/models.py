@@ -20,3 +20,6 @@ class EatenFood(models.Model):
     def __str__(self):
         return self.food
 
+    def calculate_calories(self):
+        return self.weight_eaten * self.food.calories / 100
+
