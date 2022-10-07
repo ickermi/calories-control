@@ -7,10 +7,16 @@ class Food(models.Model):
     calories = models.FloatField()
     user_added = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.name
+
 class EatenFood(models.Model):
     name = models.ForeignKey(Food, on_delete=models.CASCADE)
     user_eaten = models.ForeignKey(User, on_delete=models.CASCADE)
     #measured in grams
     weight_eaten = models.FloatField()
     eating_time = models.DateTimeField()
+
+    def __str__(self):
+        return self.name
 
