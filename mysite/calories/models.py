@@ -1,14 +1,21 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
+class FoodCategory(models.Model):
+    name = models.CharField(max_length=200)
+
+
 class Food(models.Model):
     name = models.CharField(max_length=200)
     #measured in calories per 100 grams
     calories = models.FloatField()
     user_added = models.ForeignKey(User, on_delete=models.CASCADE)
+    category = models.ForeignKey(FoodCategory, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
+
 
 class EatenFood(models.Model):
     food = models.ForeignKey(Food, on_delete=models.CASCADE)
