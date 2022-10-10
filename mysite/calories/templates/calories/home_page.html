@@ -1,10 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Control calories</title>
 </head>
 <body>
-
+{% if food_list %}
+    <ul>
+    {% for food in food_list %}
+        <li><a href="/calories/{{ food.id }}/">{{ food.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No food has been added.</p>
+{% endif %}
 </body>
 </html>
