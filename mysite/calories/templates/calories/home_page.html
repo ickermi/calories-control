@@ -3,16 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Control calories</title>
+    <style>
+    table {
+        width: 300px;
+        border: 1px solid green;
+        border-collapse: collapse;
+        margin: auto;
+        margin-bottom: 30px;
+       }
+   caption {
+        font-weight: 800;
+   }
+
+    td {
+        padding: 10px;
+        border: 1px solid green;
+        text-align: center;
+       }
+    th {
+       border: 1px solid green;
+       font-weight: 500;
+       }
+    </style>
 </head>
 <body>
-{% if food_list %}
-    <ul>
-    {% for food in food_list %}
-        <li><a href="/calories/{{ food.id }}/">{{ food.name }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No food has been added.</p>
-{% endif %}
+{% for category, foods in category_food.items %}
+    {% if foods %}
+        <table>
+            <caption>{{ category }}</caption>
+                <tr>
+                    <th>Продукт</th>
+                    <th>Калорийность</th>
+                </tr>
+            {% for food in foods %}
+            <tr>
+                <td>{{ food.name }}</td>
+                <td>{{ food.calories }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+{% endfor %}
 </body>
 </html>
