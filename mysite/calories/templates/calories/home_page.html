@@ -28,21 +28,19 @@
 </head>
 <body>
 {% for category, foods in category_food.items %}
-    {% if foods %}
-        <table>
-            <caption>{{ category }}</caption>
-                <tr>
-                    <th>Продукт</th>
-                    <th width=30%>Калорийность</th>
-                </tr>
-            {% for food in foods %}
+    <table>
+        <caption>{{ category }}</caption>
             <tr>
-                <td>{{ food.name }}</td>
-                <td>{{ food.calories }}</td>
+                <th>Продукт</th>
+                <th width=30%>Калорийность</th>
             </tr>
-            {% endfor %}
-        </table>
-    {% endif %}
+        {% for food in foods %}
+        <tr>
+            <td>{{ food.name }}</td>
+            <td>{{ food.calories }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 {% endfor %}
 </body>
 </html>
