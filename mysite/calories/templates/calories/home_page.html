@@ -27,6 +27,8 @@
     </style>
 </head>
 <body>
+<a href="{% url 'accounts:login' %}">Войти</a>
+<a href="{% url 'accounts:logout' %}">Выйти</a>
 {% for category, foods in category_food.items %}
     <table>
         <caption>{{ category }}</caption>
