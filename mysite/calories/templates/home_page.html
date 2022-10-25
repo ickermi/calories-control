@@ -2,8 +2,22 @@
 {% block main %}
 <!--<a href="{% url 'login' %}">Войти</a>-->
 <!--<a href="{% url 'logout' %}">Выйти</a>-->
-{% for category, foods in category_food.items %}
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+    <div class="container-fluid">
+        <a href="#" class="navbar-brand">ControlCalories</a>
+        {% if request.user.is_authenticated %}
+            <ul class="navbar-nav ml-right">
+                <li class="navbar-link"><a href="{% url 'logout' %}">Выйти</a></li>
+            </ul>
+        {% else %}
+            <ul class="navbar-nav ml-right">
+                <li class="navbar-link"><a href="{% url 'login' %}">Войти</a></li>
+            </ul>
+        {% endif %}
 
+    </div>
+</nav>
+{% for category, foods in category_food.items %}
     <table>
         <caption>{{ category }}</caption>
             <tr>
