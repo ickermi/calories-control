@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'calories.apps.CaloriesConfig',
     'django_extensions',
     'crispy_forms',
-    'accounts',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
