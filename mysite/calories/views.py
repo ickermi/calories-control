@@ -1,23 +1,24 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, reverse, redirect, HttpResponse
 from .models import FoodCategory, Food
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
+
 
 def home_page(request):
-    error = ''
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-        else:
-            error = 'Неверное имя пользователя или пароль'
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            login(request, form.get_user())
+            return redirect(reverse('home_page'))
+    else:
+        form = AuthenticationForm()
+
     category_food = {}
     for category in FoodCategory.objects.all():
         if food := Food.objects.filter(category=category).order_by('name'):
             category_food[category] = food
-    data = {
+    context = {
         'category_food': category_food,
-        'error': error,
+        'form': form,
     }
-    return render(request, 'home_page.html', data)
+    return render(request, 'home_page.html', context)
