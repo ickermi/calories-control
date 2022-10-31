@@ -9,33 +9,9 @@
 <body>
 <nav class="navbar navbar-expand-md navbar-light bg-light">
     <div class="container-fluid">
-        <a href="#" class="navbar-brand">ControlCalories</a>
-        {% if request.user.is_authenticated %}
-            <ul class="navbar-nav ml-auto">
-                <li class="navbar-link"><a href="{% url 'logout' %}">Выйти</a></li>
-            </ul>
-        {% else %}
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    {% if form.errors %}
-                        <span class="text-danger">Неверное имя пользователя или пароль</span>
-                    {% endif %}
-                    <form method="post" class="form-inline">
-                    {% csrf_token %}
-                        <input type="text" placeholder="имя пользователя" name="username"
-                               value="{% if form.username.value %}{{ form.username.value }}{% endif %}"
-                               class="form-control {% if form.errors %} is-invalid {% endif %}">
-                        <input type="password" placeholder="пароль" name="password"
-                               value="{% if form.password.value %}{{ form.password.value }}{% endif %}"
-                               class="form-control {% if form.errors %} is-invalid {% endif %}">
-                        <button class="btn btn-success" type="submit">Войти</button>
-                    </form>
-                </li>
-                <li>
-                    <a href="{% url 'registration' %}" class="btn btn-primary">Регистрация</a>
-                </li>
-            </ul>
-        {% endif %}
+        <a href="/" class="navbar-brand">ControlCalories</a>
+        {% block navigation %}
+        {% endblock %}
     </div>
 </nav>
     {% block main %}
