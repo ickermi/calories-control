@@ -1,8 +1,9 @@
 from django.shortcuts import render, reverse, redirect, HttpResponse
-from .models import FoodCategory, Food
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import UserRegistrationForm
+from django.contrib.auth.decorators import login_required
+from .models import FoodCategory, Food
+from .forms import UserRegistrationForm, EatenFoodForm
 
 
 def home_page(request):
@@ -37,3 +38,17 @@ def registration(request):
         form = UserRegistrationForm()
 
     return render(request, 'registration.html', {'form': form})
+
+@login_required
+def calculator(request):
+    if request.method == 'POST':
+        form = EatenFoodForm(request.POST)
+        if form.is_valid():
+            eaten_food = form.save(commit=False)
+            eaten_food.user_eaten = request.user
+            eaten_food.save()
+            return redirect(reverse('homepage'))
+    else:
+        form = EatenFoodForm()
+
+    return render(request, 'calculator.html', {'form': form})
