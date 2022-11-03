@@ -43,11 +43,12 @@ def registration(request):
 def calculator(request):
     if request.method == 'POST':
         form = EatenFoodForm(request.POST)
+        print(request.POST)
         if form.is_valid():
             eaten_food = form.save(commit=False)
             eaten_food.user_eaten = request.user
             eaten_food.save()
-            return redirect(reverse('homepage'))
+            return redirect(reverse('home_page'))
     else:
         form = EatenFoodForm()
 
