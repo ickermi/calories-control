@@ -11,7 +11,9 @@
 
             <form method="post">
                 {% csrf_token %}
-                <input type="text" list="list" placeholder="Что скушал?" name="food" class="form-control">
+                <input id="selected" autocomplete="off" type="text" list="list" placeholder="Что скушал?" name="food"
+                       value="{% if form.food.value %}{{ form.food.value }}{% endif %}"
+                       class="form-control {% if form.food.errors %} is-invalid {% endif %}">
                 <datalist id="list">
                     {% for food in form.food %}
                         <option>{{ food }}</option>
@@ -20,7 +22,7 @@
                 <br>
                 <input type="text" placeholder="Сколько скушал? (в граммах)" name="weight_eaten"
                            value="{% if form.weight_eaten.value %}{{ form.weight_eaten.value }}{% endif %}"
-                           class="form-control {% if form.errors %} is-invalid {% endif %}">
+                           class="form-control {% if form.weight_eaten.errors %} is-invalid {% endif %}">
                 <br>
                 {{ form.eating_time }}
                 <br><br>
@@ -31,4 +33,7 @@
       </div>
     </div>
   </div>
+<script>
+
+</script>
 {% endblock %}
