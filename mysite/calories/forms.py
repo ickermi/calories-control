@@ -7,6 +7,9 @@ class EatenFoodForm(forms.ModelForm):
     class Meta:
         model = EatenFood
         fields = ['food', 'weight_eaten', 'eating_time']
+        widgets = {
+            'eating_time': forms.DateTimeInput(attrs={'type':'datetime-local'}),
+        }
 
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput)
