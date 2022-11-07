@@ -11,16 +11,16 @@
 
             <form method="post">
                 {% csrf_token %}
-                <input type="text" list="list" placeholder="Что было съедено?" name="food" class="form-control">
+                <input type="text" list="list" placeholder="Что скушал?" name="food" class="form-control">
                 <datalist id="list">
                     {% for food in form.food %}
                         <option>{{ food }}</option>
                     {% endfor %}
                 </datalist>
-                <input type="text" placeholder="сколько скушал?" name="weight_eaten"
+                <input type="text" placeholder="Сколько скушал? (в граммах)" name="weight_eaten"
                            value="{% if form.weight_eaten.value %}{{ form.weight_eaten.value }}{% endif %}"
                            class="form-control {% if form.errors %} is-invalid {% endif %}">
-                <input type="text" placeholder="когда скушал?" name="eating_time"
+                <input type="text" placeholder="Когда скушал?" name="eating_time"
                        value="{% if form.eating_time.value %}{{ form.eating_time.value }}{% endif %}"
                        class="form-control {% if form.errors %} is-invalid {% endif %}">
             <button type="submit" class="btn btn-primary btn-block">Посчитать</button>

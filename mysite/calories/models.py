@@ -17,7 +17,7 @@ class Food(models.Model):
     category = models.ForeignKey(FoodCategory, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return f'{self.name}, {self.calories} калорий'
 
 
 class EatenFood(models.Model):
@@ -28,7 +28,7 @@ class EatenFood(models.Model):
     eating_time = models.DateTimeField()
 
     def __str__(self):
-        return str(self.food)
+        return self.food
 
     def calculate_calories(self):
         return self.weight_eaten * self.food.calories / 100
