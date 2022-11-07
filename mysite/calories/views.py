@@ -47,8 +47,12 @@ def calculator(request):
             eaten_food = form.save(commit=False)
             eaten_food.user_eaten = request.user
             eaten_food.save()
-            return redirect(reverse('home_page'))
+            request.session['calories'] = eaten_food.calculate_calories()
+            return redirect(reverse('calc_result'))
     else:
         form = EatenFoodForm()
 
-    return render(request, 'calculator.html', {'form': form})
+    return render(request, 'add_eaten_food.html', {'form': form})
+
+def calc_result(request):
+    return render(request, 'calc_result.html', {'calories': request.session['calories']})
