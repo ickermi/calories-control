@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block main %}
+<div  class="container">
+    <div  class="row justify-content-center">
+      <div  class="col-4">
+          <div class="card">
+            <div class="card-body">
+            <h4 class="card-title">Калькулятор калорий</h4>
+            <form method="get" action="/calculator">
+                <input id="selected" class="form-control" autocomplete="off"
+                       type="text" list="list" placeholder="Что скушал?" name="food_id">
+                <datalist id="list">
+                    {% for food in food %}
+                        <option value="{{ food.pk }}">{{ food }}</option>
+                    {% endfor %}
+                </datalist>
+            <button type="submit" class="btn btn-primary btn-block">Посчитать</button>
+            </form>
+            </div>
+            </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

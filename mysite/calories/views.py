@@ -39,8 +39,12 @@ def registration(request):
 
     return render(request, 'registration.html', {'form': form})
 
-@login_required
 def calculator(request):
+    food = Food.objects.all()
+    return render(request, 'calculator.html', {'food': food})
+
+@login_required
+def add_eaten_food(request):
     if request.method == 'POST':
         form = EatenFoodForm(request.POST)
         if form.is_valid():
