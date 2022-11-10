@@ -27,6 +27,7 @@ def home_page(request):
 
 @login_required
 def profile(request):
+    # eaten_food = EatenFood.objects.filter()
     return render(request, 'profile.html', context)
 
 def registration(request):
