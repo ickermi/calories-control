@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import EatenFood
+from .models import Food, EatenFood
 
 class EatenFoodForm(forms.ModelForm):
 
@@ -10,6 +10,12 @@ class EatenFoodForm(forms.ModelForm):
         widgets = {
             'eating_time': forms.DateTimeInput(attrs={'type':'datetime-local'}),
         }
+
+
+class CalculatorForm(forms.Form):
+    food = forms.ModelChoiceField(queryset=Food.objects.all())
+    weight = forms.FloatField()
+
 
 class UserRegistrationForm(forms.ModelForm):
     password = forms.CharField(label='Пароль', widget=forms.PasswordInput)

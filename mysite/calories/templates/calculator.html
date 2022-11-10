@@ -9,14 +9,22 @@
             <div class="card-body">
             <h4 class="card-title">Калькулятор калорий</h4>
             <form method="get" action="/calculator">
-                <input id="selected" class="form-control" autocomplete="off"
-                       type="text" list="list" placeholder="Что скушал?" name="food_id">
+                <input id="selected" autocomplete="off" type="text" list="list" placeholder="Что скушал?" name="food"
+                       value="{% if form.food.value %}{{ form.food.value }}{% endif %}"
+                       class="form-control {% if form.food.errors %} is-invalid {% endif %}">
                 <datalist id="list">
-                    {% for food in food %}
-                        <option value="{{ food.pk }}">{{ food }}</option>
+                    {% for food in form.food %}
+                        <option>{{ food }}</option>
                     {% endfor %}
                 </datalist>
+                <input autocomplete="off" type="text" placeholder="Сколько скушал?" name="weight"
+                       value="{% if form.weight.value %}{{ form.weight.value }}{% endif %}"
+                       class="form-control {% if form.weight.errors %} is-invalid {% endif %}">
             <button type="submit" class="btn btn-primary btn-block">Посчитать</button>
+                {% if calories %}
+                <br>
+                <label>Содержит {{ calories }} калорий</label>
+                {% endif %}
             </form>
             </div>
             </div>
