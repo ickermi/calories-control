@@ -32,4 +32,3 @@ class EatenFood(models.Model):
 
     def calculate_calories(self):
         return self.weight_eaten * self.food.calories / 100
-

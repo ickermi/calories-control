@@ -17,7 +17,7 @@
                         <option>{{ food }}</option>
                     {% endfor %}
                 </datalist>
-                <input autocomplete="off" type="text" placeholder="Сколько скушал?" name="weight"
+                <input autocomplete="off" type="text" placeholder="Сколько скушал?(в граммах)" name="weight"
                        value="{% if form.weight.value %}{{ form.weight.value }}{% endif %}"
                        class="form-control {% if form.weight.errors %} is-invalid {% endif %}">
             <button type="submit" class="btn btn-primary btn-block">Посчитать</button>
