@@ -25,6 +25,9 @@ def home_page(request):
     }
     return render(request, 'home_page.html', context)
 
+@login_required
+def profile(request):
+    return render(request, 'profile.html', context)
 
 def registration(request):
     if request.method == 'POST':
