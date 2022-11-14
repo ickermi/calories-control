@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div  class="container">
+    <div  class="row justify-content-center">
+      <div  class="col-8">
+          <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">Еда</th>
+                  <th scope="col">Вес</th>
+                  <th scope="col">Время</th>
+                  <th scope="col">Калории</th>
+                </tr>
+              </thead>
+                <tbody>
+                {% for item in food %}
+                    <tr>
+                        <td>{{ item.food }}</td>
+                        <td>{{ item.weight_eaten }} г.</td>
+                        <td>{{ item.eating_time.time }}</td>
+                        <td>{{ item.calculate_calories }} всего калорий</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+      </div>
+    </div>
+  </div>
+{% endblock %}

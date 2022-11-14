@@ -30,20 +30,21 @@ def home_page(request):
 @login_required
 def profile(request):
     target_time = timezone.now() - timezone.timedelta(days=7)
-    food = EatenFood.objects.filter(eating_time__gte = target_time)
+    food = EatenFood.objects.filter(user = request.user, eating_time__gte=target_time)
     date_calories = {}
     for f in food:
         date = f.eating_time.date()
-        date_calories.setdefault(date)
-        if date_calories[date]:
-            date_calories[date] += f.calculate_calories()
-        else:
-            date_calories[date] = f.calculate_calories()
+        date_calories.setdefault(date, 0)
+        date_calories[date] += f.calculate_calories()
 
     context = {
         'date_calories': date_calories,
     }
     return render(request, 'profile.html', context)
+
+def date_detail(request, date):
+    food = EatenFood.objects.filter(user=request.user, eating_time__contains=date)
+    return render(request, 'date_detail.html', {'food': food})
 
 def registration(request):
     if request.method == 'POST':

@@ -8,7 +8,7 @@
                 <tbody>
                 {% for date, calories in date_calories.items %}
                     <tr>
-                        <td><a href="#">{{ date }}</a></td>
+                        <td><a href="{% url 'date_detail' date=date %}">{{ date }}</a></td>
                         <td>{{ calories }} калорий</td>
                     </tr>
                 {% endfor %}
