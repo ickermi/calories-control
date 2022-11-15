@@ -43,7 +43,9 @@ def profile(request):
     return render(request, 'profile.html', context)
 
 def date_detail(request, date):
-    food = EatenFood.objects.filter(user=request.user, eating_time__contains=date)
+    start = timezone.make_aware(timezone.datetime.strptime(date, "%Y-%m-%d"))
+    end = start + timezone.timedelta(days=1)
+    food = EatenFood.objects.filter(user=request.user, eating_time__gte=start, eating_time__lte=end)
     return render(request, 'date_detail.html', {'food': food})
 
 def registration(request):
