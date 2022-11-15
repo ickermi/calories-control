@@ -19,7 +19,7 @@
                     <tr>
                         <td>{{ item.food }}</td>
                         <td>{{ item.weight_eaten }} г.</td>
-                        <td>{{ item.eating_time.astimezone.time }}</td>
+                        <td>{{ item.eating_time|localtime|time }}</td>
                         <td>{{ item.calculate_calories }} всего калорий</td>
                     </tr>
                 {% endfor %}
