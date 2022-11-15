@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load tz %}
 
 {% block main %}
 <div  class="container">
@@ -18,7 +19,7 @@
                     <tr>
                         <td>{{ item.food }}</td>
                         <td>{{ item.weight_eaten }} г.</td>
-                        <td>{{ item.eating_time.time }}</td>
+                        <td>{{ item.eating_time.astimezone.time }}</td>
                         <td>{{ item.calculate_calories }} всего калорий</td>
                     </tr>
                 {% endfor %}
