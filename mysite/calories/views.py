@@ -30,7 +30,7 @@ def home_page(request):
 @login_required
 def profile(request):
     target_time = timezone.now() - timezone.timedelta(days=7)
-    food = EatenFood.objects.filter(user = request.user, eating_time__gte=target_time)
+    food = EatenFood.objects.filter(user = request.user, eating_time__gte=target_time).order_by('-eating_time')
     date_calories = {}
     for f in food:
         date = f.eating_time.date()
@@ -45,7 +45,7 @@ def profile(request):
 def date_detail(request, date):
     start = timezone.make_aware(timezone.datetime.strptime(date, "%Y-%m-%d"))
     end = start + timezone.timedelta(days=1)
-    food = EatenFood.objects.filter(user=request.user, eating_time__gte=start, eating_time__lte=end)
+    food = EatenFood.objects.filter(user=request.user, eating_time__gte=start, eating_time__lte=end).order_by('eating_time')
     return render(request, 'date_detail.html', {'food': food})
 
 def registration(request):
